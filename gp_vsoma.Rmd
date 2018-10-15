@@ -41,3 +41,19 @@ get.constraints(j)
 get.variables(j)
 ```
 
+
+```{r}
+ k <- read.lp('gp2.lp')
+k
+```
+
+
+
+```{r}
+solve(k)
+get.objective(k)
+get.constraints(k)
+
+get.variables(k)
+```
+
