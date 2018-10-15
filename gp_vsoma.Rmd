@@ -1,0 +1,43 @@
+---
+title: "goal_assignment"
+output:
+  html_document: default
+  pdf_document: default
+  word_document: default
+---
+
+```{r}
+o <- read.lp('gp.lp')
+
+o
+```
+
+
+
+
+```{r}
+solve(o)
+get.objective(o)
+get.constraints(o)
+
+get.variables(o)
+
+```
+
+/ Here the solution  is 0 so , it satisfies priority 1 /
+
+```{r}
+j <- read.lp('gp1.lp')
+j
+
+```
+
+
+```{r}
+solve(j)
+get.objective(j)
+get.constraints(j)
+
+get.variables(j)
+```
+
