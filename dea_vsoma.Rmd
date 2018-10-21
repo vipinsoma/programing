@@ -1,0 +1,114 @@
+---
+title: "DEA"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r}
+input<- matrix(c(150,400,320,520,350,320,0.2,0.7,1.2,2,1.2,0.7),ncol = 2)
+output <- matrix(c(14000,14000,42000,28000,19000,14000,3500,21000,10500,42000,25000,15000),ncol = 2)
+input
+output
+```
+
+
+```{r}
+colnames(input)<-c('staff_hour','supplies_day')
+colnames(output)<- c('reimbursed_pd','privately_pd')
+input
+output
+```
+```{r}
+library(Benchmarking)
+```
+
+```{r}
+c<- dea(input,output, RTS ='CRS')
+c
+```
+
+```{r}
+peers(c)
+lambda(c)
+```
+
+```{r}
+dea.plot.frontier(input,output,RTS = 'crs',xlab = 'input', ylab ='output',main ='Input vs Output using CRS')
+```
+
+```{r}
+d<- dea(input,output, RTS ='drs')
+d
+```
+
+
+```{r}
+peers(d)
+lambda(d)
+```
+```{r}
+dea.plot.frontier(input,output,RTS = 'drs',xlab = 'input', ylab ='output',main ='Input vs Output using DRS')
+
+```
+
+```{r}
+i<-dea(input,output, RTS ='irs')
+i
+```
+
+
+```{r}
+peers(i)
+lambda(i)
+```
+
+```{r}
+dea.plot.frontier(input,output,RTS = 'irs',xlab = 'input', ylab ='output',main ='Input vs Output using IRS')
+```
+
+
+```{r}
+v<-dea(input,output, RTS ='vrs')
+v
+
+```
+
+```{r}
+peers(v)
+lambda(v)
+```
+
+```{r}
+dea.plot.frontier(input,output,RTS = 'vrs',xlab = 'input', ylab ='output',main ='Input vs Output using VRS')
+```
+
+
+```{r}
+e_crs<-c(1.0000, 1.0000 ,1.0000, 1.0000, 0.9775, 0.8675)
+e_drs<-c( 1.0000, 1.0000 ,1.0000, 1.0000, 0.9775, 0.8675)
+e_irs<-c(1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 0.8963)
+e_vrs<-c(1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 0.8963)
+facility<-c('facility 1','facility 2','facility 3','facility 4','facility 5', 'facility 6')
+```
+
+```{r}
+efficiency<-data.frame(facility,e_crs,e_drs,e_irs,e_vrs)
+efficiency
+```
+
+
+
+
+```{r}
+#
+facility<-c('facility 1','facility 2','facility 3','facility 4','facility 5', 'facility 6')
+crs <-c('staff_hour','supplies_day','reimbursed_pd','privately_pd','(0.20)*staff_hour + (0.08)*supplies_day + (0)*reimbursed_pd + (0.53)*privately_pd',' (0.34)*staff_hour+(0.39)*supplies_day  (0)+ (0.13)*supplies_day')
+drs<-c('staff_hour','supplies_day','reimbursed_pd','privately_pd','(0.20)*staff_hour + (0.08)*supplies_day + (0)*reimbursed_pd + (0.53)*privately_pd',' (0.34)*staff_hour+(0.39)*supplies_day  (0)+ (0.13)*supplies_day')
+irs<-c()
+```
+
