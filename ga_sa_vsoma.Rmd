@@ -141,7 +141,7 @@ abline(lm(cost~number_passangers,data = airline_cost),col = 'red')
 
 
 ```{r}
-object_ga_sa <- function(x=c(61,63,67,69,70,74,76,81,86,91,95,97),y=c(4.28,4.08,4.42,4.17,4.48,4.3,4.82,4.7,5.11,5.13,5.64,5.56)){min(sum((y-(b0-b1*x))^2))}
+object_ga_sa <- function(x= number_passangers,y= cost){min(sum((y-(b0-b1*x))^2))}
 lbound<- c(0,0)
 ubound<-c(2,2)
 ```
