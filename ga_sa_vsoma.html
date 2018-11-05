@@ -261,17 +261,17 @@ rbind(tickers, round(100 * wstar.GenSA, 2))</code></pre>
 <pre><code>## [1] 0.3208225</code></pre>
 <pre class="r"><code>wstar.GenSA</code></pre>
 <pre><code>## [1] 0.1235519 0.3024725 0.1663784 0.2071431 0.2004541</code></pre>
-<pre class="r"><code>gen_solution&lt;-c(0.1235519 ,0.3024725 ,0.1663784 ,0.2071431, 0.2004541)
-gap_solution&lt;-c(0.01902541,0.05520675, 0.04925882, 0.9637234, 0.02192808)
-result &lt;-cbind(gap_solution,gen_solution)
+<pre class="r"><code>Stimulated_Annealing&lt;-c(0.1235519 ,0.3024725 ,0.1663784 ,0.2071431, 0.2004541)
+genitic_algorithm&lt;-c(0.01902541,0.05520675, 0.04925882, 0.9637234, 0.02192808)
+result &lt;-cbind(Stimulated_Annealing,genitic_algorithm)
 row.names(result)&lt;-c(&quot;ACET&quot;,&quot;TRQ&quot;,  &quot;ASM&quot;,  &quot;LC&quot;,   &quot;AEHR&quot;)
 result</code></pre>
-<pre><code>##      gap_solution gen_solution
-## ACET   0.01902541    0.1235519
-## TRQ    0.05520675    0.3024725
-## ASM    0.04925882    0.1663784
-## LC     0.96372340    0.2071431
-## AEHR   0.02192808    0.2004541</code></pre>
+<pre><code>##      Stimulated_Annealing genitic_algorithm
+## ACET            0.1235519        0.01902541
+## TRQ             0.3024725        0.05520675
+## ASM             0.1663784        0.04925882
+## LC              0.2071431        0.96372340
+## AEHR            0.2004541        0.02192808</code></pre>
 <p>Q.2 In this problem, you will apply both GA and SA to search for the optimal parameters in a regression. Do the following: Create a dataset with with 20 X, Y values. You may use the same dataset that you used in Dr. Razavi’s class. Use GA and SA to search for optimal b0 and b1 estimates. The objective should be to minimize SSE (sums of square error). How does this compare to the exhaustive search you did in your class? Plot your solution, and the optimal regression line (using the built-in function). Clearly label the output.</p>
 </div>
 <div id="finding-b0-and-b1-value-manually" class="section level1">

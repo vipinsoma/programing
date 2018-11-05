@@ -90,9 +90,9 @@ wstar.GenSA
 ```
 
 ```{r}
-gen_solution<-c(0.1235519 ,0.3024725 ,0.1663784 ,0.2071431, 0.2004541)
-gap_solution<-c(0.01902541,0.05520675, 0.04925882, 0.9637234, 0.02192808)
-result <-cbind(gap_solution,gen_solution)
+Stimulated_Annealing<-c(0.1235519 ,0.3024725 ,0.1663784 ,0.2071431, 0.2004541)
+genitic_algorithm<-c(0.01902541,0.05520675, 0.04925882, 0.9637234, 0.02192808)
+result <-cbind(Stimulated_Annealing,genitic_algorithm)
 row.names(result)<-c("ACET","TRQ",  "ASM",  "LC",   "AEHR")
 result
 ```
