@@ -141,9 +141,11 @@ abline(lm(cost~number_passangers,data = airline_cost),col = 'red')
 
 
 ```{r}
-object_ga_sa <- function(x= number_passangers,y= cost){min(sum((y-(b0-b1*x))^2))}
-lbound<- c(0,0)
-ubound<-c(2,2)
+x=c(61,63,67,69,70,74,76,81,86,91,95,97)
+y=c(4.28,4.08,4.42,4.17,4.48,4.3,4.82,4.7,5.11,5.13,5.64,5.56)
+object_ga_sa <- function(b0, b1){sum((y-(b0-b1*x))^2)}
+lbound<- c(1,0.01)
+ubound<-c(1.6,1)
 ```
 
 ```{r}
@@ -151,7 +153,7 @@ library(GenSA)
 ```
 
 ```{r}
-ga_linear <- ga(type = "real-valued",fitnes=object_ga_sa, lower=0.02,upper=2,popSize=20)
+ga_linear <- ga(type = "real-valued",fitnes= function (x) -object_ga_sa(x[1],x[2]), lower=lbound,upper=ubound,popSize=20)
 summary(ga_linear)
 
 
@@ -167,20 +169,35 @@ plot(ga_linear)
 ```
 
 ```{r}
-gen_linear <- GenSA(fn = object_ga_sa, lower = rep(0,2), upper = rep(0.03, 2), control = list(smooth = FALSE, max.call = 3000))
-gen_linear
+par <- c(2, -1)
+gen_linear <- GenSA(
+    lower = rep(0.03,2),
+    upper = rep(1.6,2),
+    fn = function (x) object_ga_sa(x[1], x[2])
+)
+gen_linear[c('value','par')]
+
 ```
 
-
 ```{r}
-stimulated_annealing_results<-c(1.593342e-06,2.681883e-06) 
-genetic_algoritham<-c(1.959691,NA)
-RESUT<-data.frame(stimulated_annealing_results,genetic_algoritham)
-colnames(RESUT)<-c('Stimulated Annealing par values','GA - x1 values')
+stimulated_annealing_results<-c(1.587933,0.03) 
+genetic_algoritham<-c(1.555996,0.03454577)
+normal_regression<-c(1.569793,0.0407016)
+RESUT<-data.frame(stimulated_annealing_results,genetic_algoritham,normal_regression)
+colnames(RESUT)<-c('Stimulated Annealing','GA values','normal_regression')
+rownames(RESUT)<-c('x1','x2')
 RESUT
 ```
 
+```{r}
+x=c(61,63,67,69,70,74,76,81,86,91,95,97)
+y=c(4.28,4.08,4.42,4.17,4.48,4.3,4.82,4.7,5.11,5.13,5.64,5.56)
 
-
-
+df = data.frame(x,y)
+basic <-ggplot(data=df) + geom_point(mapping=aes(x,y) )  
+line1<- basic + (geom_abline(aes(slope=0.0407016 , intercept =1.5697930, colour = "Linear Regression")))
+line2<- line1+(geom_abline(aes(slope= 0.030000, intercept = 1.587933, colour = "Simulated Annealing")))
+line3 <- line2 + (geom_abline(aes(slope= 0.03454577 , intercept = 1.55599600 ,colour = "Genetic Algorithm"))) + scale_color_manual("", values = c("Genetic Algorithm" = "black", "Simulated Annealing" = "red", "Linear Regression" = "blue"))
+line3
+```
 
